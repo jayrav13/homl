@@ -126,6 +126,36 @@ class API {
         
     }
     
+    static func getDates(completion : (success : Bool, data : JSON) -> Void) -> Void {
+        
+        Alamofire.request(Method.GET, baseURL + "match/" + self.number + "?dates").responseJSON { (response) -> Void in
+            
+            if(response.result.isSuccess) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                completion(success: false, data: nil)
+            }
+            
+        }
+        
+    }
+    
+    static func getDateMatches(date: String, completion : (success : Bool, data : JSON) -> Void) -> Void {
+        
+        Alamofire.request(Method.GET, baseURL + "match/" + self.number + "?date=" + date).responseJSON { (response) -> Void in
+            
+            if(response.result.isSuccess) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                completion(success: false, data: nil)
+            }
+            
+        }
+        
+    }
+    
 }
 
 class Standard {

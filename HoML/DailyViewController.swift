@@ -14,7 +14,9 @@ class DailyViewController : UIViewController, UITableViewDelegate, UITableViewDa
     
     var tableView : UITableView!
     
-    var date : String?
+    var date : String!
+    
+    var dailyMatches : JSON!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,22 +28,38 @@ class DailyViewController : UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
         self.view.addSubview(tableView)
+        
+        dailyMatches = []
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if(dailyMatches.count != 0) {
+            return dailyMatches.count
+        } else {
+            return 1
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell : UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell")!
         cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell")
+        if(dailyMatches.count != 0) {
+            cell.textLabel?.text = self.dailyMatches["matches"][indexPath.row]["match"]["number"].stringValue
+            cell.detailTextLabel?.text = self.dailyMatches["matches"][indexPath.row]["match"]["bio"].stringValue
+        }
+        else {
+            cell.textLabel?.text = "Test"
+        }
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let mdvc : MatchDetailsViewController = MatchDetailsViewController()
+        mdvc.matchData = self.dailyMatches["matches"][indexPath.row]
+        self.navigationController?.pushViewController(mdvc, animated: true)
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

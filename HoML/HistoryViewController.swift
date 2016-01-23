@@ -14,7 +14,7 @@ class HistoryViewController : UIViewController, UITableViewDelegate, UITableView
     
     var tableView : UITableView!
     
-    var matchesData: JSON!
+    var matchDates: JSON!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,24 +27,44 @@ class HistoryViewController : UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-        
         self.view.addSubview(tableView)
+        
+        matchDates = []
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        API.getDates { (success, data) -> Void in
+            self.matchDates = data
+            print (self.matchDates)
+            self.tableView.reloadData()
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if(matchDates.count != 0) {
+            return matchDates.count
+        } else {
+            return 1
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell : UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell")!
         cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell")
+        if(matchDates.count != 0) {
+            cell.textLabel?.text = self.matchDates["dates"][indexPath.row]["date"].stringValue
+        }
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let dvc : DailyViewController = DailyViewController()
-        self.navigationController?.pushViewController(dvc, animated: true)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let dvc : DailyViewController = DailyViewController()
+        dvc.date = self.tableView.cellForRowAtIndexPath(indexPath)?.textLabel!.text
+        API.getDateMatches((self.tableView.cellForRowAtIndexPath(indexPath)?.textLabel!.text)!) { (success, data) -> Void in
+            dvc.dailyMatches = data
+        }
+        self.navigationController?.pushViewController(dvc, animated: true)
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
