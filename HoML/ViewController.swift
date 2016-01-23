@@ -105,7 +105,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     
     func pushToHistoryViewController(sender : UIButton) {
         let hvc : HistoryViewController = HistoryViewController()
-        
+        hvc.matchesData = self.userMatches
         self.navigationController?.pushViewController(hvc, animated: true)
     }
     
