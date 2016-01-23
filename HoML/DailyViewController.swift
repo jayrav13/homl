@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
 class DailyViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -41,6 +42,10 @@ class DailyViewController : UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return (Standard.screenHeight - 44)/5
     }
     
     override func didReceiveMemoryWarning() {
