@@ -148,6 +148,10 @@ class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPicker
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
+        self.hidePickerView()
+    }
+    
+    func hidePickerView() {
         UIView.animateWithDuration(0.4, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
             
             self.ageSelectionPickerView.frame = CGRect(x: 0, y: Standard.screenHeight, width: Standard.screenWidth, height: 216)
@@ -155,6 +159,18 @@ class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPicker
             }) { (myBool : Bool) -> Void in
                 
                 self.ageSelectionPickerViewIsShowing = false
+                
+        }
+    }
+    
+    func showPickerView() {
+        UIView.animateWithDuration(0.4, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+            
+            self.ageSelectionPickerView.frame = CGRect(x: 0, y: Standard.screenHeight - 216, width: Standard.screenWidth, height: 216)
+            
+            }) { (myBool : Bool) -> Void in
+                
+                self.ageSelectionPickerViewIsShowing = true
                 
         }
     }
@@ -201,15 +217,7 @@ class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPicker
         if(sender.titleLabel?.text == "Select...") {
             sender.setTitle("18", forState: UIControlState.Normal)
         }
-        UIView.animateWithDuration(0.4, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
-            
-            self.ageSelectionPickerView.frame = CGRect(x: 0, y: Standard.screenHeight - 216, width: Standard.screenWidth, height: 216)
-            
-            }) { (myBool : Bool) -> Void in
-                
-                // self.pickerViewIsVisible = true
-                
-        }
+        self.showPickerView()
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -233,6 +241,9 @@ class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPicker
     func textFieldDidBeginEditing(textField: UITextField) {
         
         print("Begin!")
+        if(self.ageSelectionPickerViewIsShowing == true) {
+            self.hidePickerView()
+        }
         
     }
     

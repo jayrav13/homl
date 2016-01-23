@@ -28,6 +28,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     var userMatches : JSON!
     
     override func viewDidLoad() {
+
+        for family: String in UIFont.familyNames()
+        {
+            print("\(family)")
+            for names: String in UIFont.fontNamesForFamilyName(family)
+            {
+                print("== \(names)")
+            }
+        }
         
         // Basics
         super.viewDidLoad()
