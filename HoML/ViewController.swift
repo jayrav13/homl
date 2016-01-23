@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import SwiftyJSON
 
 class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
 
@@ -23,12 +24,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     var biosTableView : UITableView!
     var goToProfileLabel : UILabel!
     
+    var currentUser : JSON!
+    var userMatches : JSON!
+    
     override func viewDidLoad() {
         
         // Basics
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
         self.title = "HOME"
+        self.userMatches = []
         
         // Location Setup
         self.locationManager = CLLocationManager()
@@ -105,8 +110,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell : UITableViewCell = self.biosTableView.dequeueReusableCellWithIdentifier("cell")!
-        cell.textLabel?.text = "Test"
+        let cell : UITableViewCell = self.biosTableView.dequeueReusableCellWithIdentifier("cell")!
+        if(userMatches.count != 0) {
+            cell.textLabel?.text = self.userMatches["matches"][indexPath.row]["user2_id"].stringValue
+        }
+        else {
+            cell.textLabel?.text = "Test"
+        }
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
     }
     
@@ -115,7 +126,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        if(userMatches.count != 0) {
+            return userMatches["matches"].count
+        }
+        else {
+            return 0
+        }
+        
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -126,9 +143,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         if(NSAPI.getProfileAddedSetting()) {
             self.view.addSubview(self.saidHelloToLabel)
             self.view.addSubview(self.biosTableView)
+            API.getMatches { (success, data) -> Void in
+                if(success) {
+                    self.userMatches = data
+                    self.biosTableView.reloadData()
+                }
+                else {
+                    print("Error")
+                }
+            }
         }
         else {
             self.view.addSubview(self.goToProfileLabel)
+            // Do nothing
         }
     }
     

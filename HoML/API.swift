@@ -76,6 +76,21 @@ class API {
         
     }
     
+    static func getMatches(completion : (success : Bool, data : JSON) -> Void) -> Void {
+        
+        Alamofire.request(Method.GET, baseURL + "match/" + "sakib").responseJSON { (response) -> Void in
+            
+            if(response.result.isSuccess) {
+                completion(success: true, data: JSON(response.result.value!))
+            }
+            else {
+                completion(success: false, data: nil)
+            }
+            
+        }
+        
+    }
+    
 }
 
 class Standard {
@@ -93,6 +108,14 @@ class NSAPI {
     
     static func setProfileAddedSetting(setting : Bool) {
         NSUserDefaults.standardUserDefaults().setBool(setting, forKey: "profileSet")
+    }
+    
+    static func getUserName() -> String {
+        return NSUserDefaults.standardUserDefaults().stringForKey("username")!
+    }
+    
+    static func setUserName(username : String) {
+        NSUserDefaults.standardUserDefaults().setObject(username, forKey: "username")
     }
     
 }

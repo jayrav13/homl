@@ -8,10 +8,12 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
 class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     var username : String!
+    var userData : JSON!
     var usernameTextField : UITextField!
     var usernameTextLabel : UILabel!
     
@@ -25,7 +27,8 @@ class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPicker
     var ageSelectionPickerView : UIPickerView!
     var ageSelectionPickerViewIsShowing : Bool!
     
-    
+    var bioTextLabel : UILabel!
+    var bioTextField : UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,6 +88,22 @@ class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPicker
         
         self.ageSelectionPickerViewIsShowing = false
         
+        self.bioTextLabel = UILabel()
+        self.bioTextLabel.frame = CGRect(x: 0, y: Standard.screenHeight * 0.5, width: Standard.screenWidth, height: Standard.screenHeight * 0.05)
+        self.bioTextLabel.text = "tell the world about yourself."
+        self.bioTextLabel.textAlignment = NSTextAlignment.Center
+        self.view.addSubview(self.bioTextLabel)
+        
+        self.bioTextField = UITextField()
+        self.bioTextField.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.55, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.05)
+        self.bioTextField.placeholder = "bio"
+        self.bioTextField.textAlignment = NSTextAlignment.Center
+        self.view.addSubview(self.bioTextField)
+        
+        if(userData != nil) {
+            // SOMETHING
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -105,12 +124,31 @@ class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     func saveButtonPressed(sender : UIButton) {
-        if(usernameTextLabel.text?.characters.count > 0) {
-            NSAPI.setProfileAddedSetting(true)
+        if(NSAPI.getProfileAddedSetting()) {
+            // Editing
         }
         else {
-            // Error
+            if((usernameTextField.text?.characters.count) > 0) {
+                NSAPI.setProfileAddedSetting(true)
+                
+                let pickerValues = ["M", "F", "O"]
+                
+                API.createUser(Int((self.ageSelectionButton.titleLabel?.text)!)!, gender: pickerValues[self.genderSegmentedControl.selectedSegmentIndex], bio: self.bioTextField.text!, story: "pending", completion: { (success, data) -> Void in
+                    
+                    if(success) {
+                        self.navigationController?.popToRootViewControllerAnimated(true)
+                    }
+                    else {
+                        // Error
+                    }
+                    
+                })
+            }
+            else {
+                // Error
+            }
         }
+        
     }
     
     func ageSelected(sender : UIButton) {

@@ -43,9 +43,6 @@ class HistoryViewController : UIViewController, UITableViewDelegate, UITableView
         self.navigationController?.pushViewController(dvc, animated: true)
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
