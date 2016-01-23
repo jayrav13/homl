@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
 class HistoryViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -41,6 +42,11 @@ class HistoryViewController : UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let dvc : DailyViewController = DailyViewController()
         self.navigationController?.pushViewController(dvc, animated: true)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return (Standard.screenHeight - 44)/10
     }
     
     override func didReceiveMemoryWarning() {
