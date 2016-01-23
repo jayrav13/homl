@@ -14,6 +14,8 @@ class HistoryViewController : UIViewController, UITableViewDelegate, UITableView
     
     var tableView : UITableView!
     
+    var matchesData: JSON!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
