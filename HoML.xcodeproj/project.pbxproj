@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		70A9F6221C5365FD0027B3F7 /* DailyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A9F6211C5365FC0027B3F7 /* DailyViewController.swift */; };
 		7ADD5BC884ED6370D23A344C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FDCF531341D3EFA66FBFC8D /* Pods.framework */; };
 		E55A4F571C53483300E95058 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55A4F561C53483300E95058 /* HistoryViewController.swift */; };
 		E55A4F591C53485C00E95058 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55A4F581C53485C00E95058 /* ProfileViewController.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		1FDCF531341D3EFA66FBFC8D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		70A9F6211C5365FC0027B3F7 /* DailyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyViewController.swift; sourceTree = "<group>"; };
 		7BEF425C0BC7B729AA5FC659 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D1CFB2E38AF68C2D2CFE482A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E55A4F561C53483300E95058 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				E58ACA371C532BEE001EF569 /* AppDelegate.swift */,
 				E58ACA391C532BEE001EF569 /* ViewController.swift */,
 				E55A4F561C53483300E95058 /* HistoryViewController.swift */,
+				70A9F6211C5365FC0027B3F7 /* DailyViewController.swift */,
 				E55A4F581C53485C00E95058 /* ProfileViewController.swift */,
 				E565C4761C5333CD001EC046 /* API.swift */,
 				E58ACA3B1C532BEE001EF569 /* Main.storyboard */,
@@ -135,6 +138,7 @@
 				TargetAttributes = {
 					E58ACA331C532BEE001EF569 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = JM88DB2765;
 					};
 				};
 			};
@@ -222,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70A9F6221C5365FD0027B3F7 /* DailyViewController.swift in Sources */,
 				E55A4F591C53485C00E95058 /* ProfileViewController.swift in Sources */,
 				E58ACA3A1C532BEE001EF569 /* ViewController.swift in Sources */,
 				E58ACA381C532BEE001EF569 /* AppDelegate.swift in Sources */,
@@ -339,10 +344,13 @@
 			baseConfigurationReference = D1CFB2E38AF68C2D2CFE482A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = HoML/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jrav.HoML;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -351,10 +359,13 @@
 			baseConfigurationReference = 7BEF425C0BC7B729AA5FC659 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = HoML/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jrav.HoML;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -1,35 +1,36 @@
 //
-//  HistoryViewController.swift
+//  DailyViewController.swift
 //  HoML
 //
-//  Created by Jay Ravaliya on 1/23/16.
+//  Created by Alec Huang on 1/23/16.
 //  Copyright © 2016 JRav. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class HistoryViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DailyViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var tableView : UITableView!
+    
+    var date : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "History"
+        self.title = date
         
         // set up TableView
         tableView = UITableView(frame: self.view.frame)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         
         self.view.addSubview(tableView)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 5
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -39,14 +40,11 @@ class HistoryViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let dvc : DailyViewController = DailyViewController()
-        self.navigationController?.pushViewController(dvc, animated: true)
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
 }
