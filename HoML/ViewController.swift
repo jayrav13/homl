@@ -51,7 +51,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         
         // If Location Services enabled, set up timer.
         if(CLLocationManager.locationServicesEnabled()) {
-            // locationTimer = NSTimer.scheduledTimerWithTimeInterval(300, target: self, selector: "sendLocation", userInfo: nil, repeats: true)
+            locationTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: "sendLocation", userInfo: nil, repeats: true)
         }
         
         // UI Elements - do not add yet
@@ -75,7 +75,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         self.goToProfileLabel.textAlignment = NSTextAlignment.Center
         
         self.loadUIElements()
-        
+                
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -94,7 +94,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
 
     func sendLocation() {
         API.sendLocation((self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!) { (success, data) -> Void in
-            
+            if(success) {
+                print("Sent location!")
+            }
+            else {
+                print("Error sending location!")
+            }
         }
     }
     
@@ -106,13 +111,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     func pushToProfileViewController(sender : UIButton) {
         // NSAPI.setProfileAddedSetting(true)
         let pvc : ProfileViewController = ProfileViewController()
+        if(self.currentUser != nil) {
+            pvc.userData = self.currentUser
+        }
         self.navigationController?.pushViewController(pvc, animated: true)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell : UITableViewCell = self.biosTableView.dequeueReusableCellWithIdentifier("cell")!
+        var cell : UITableViewCell = self.biosTableView.dequeueReusableCellWithIdentifier("cell")!
+        cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell")
         if(userMatches.count != 0) {
-            cell.textLabel?.text = self.userMatches["matches"][indexPath.row]["user2_id"].stringValue
+            cell.textLabel?.text = self.userMatches["matches"][indexPath.row]["match"]["number"].stringValue
+            cell.detailTextLabel?.text = self.userMatches["matches"][indexPath.row]["match"]["bio"].stringValue
         }
         else {
             cell.textLabel?.text = "Test"
@@ -143,6 +153,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         if(NSAPI.getProfileAddedSetting()) {
             self.view.addSubview(self.saidHelloToLabel)
             self.view.addSubview(self.biosTableView)
+            API.getUser({ (success, data) -> Void in
+                if(success) {
+                    for(var i = 0; i < data["users"].count; i++) {
+                        if(data["users"][i]["number"].stringValue == API.number) {
+                            self.currentUser = data["users"][i]
+                            break
+                        }
+                    }
+                    //  print(self.currentUser)
+                    // self.currentUser = data
+                }
+                else {
+                    print("Error - user data")
+                }
+            })
             API.getMatches { (success, data) -> Void in
                 if(success) {
                     self.userMatches = data
