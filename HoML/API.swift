@@ -77,3 +77,22 @@ class API {
     }
     
 }
+
+class Standard {
+    
+    static let screenHeight = UIScreen.mainScreen().bounds.height
+    static let screenWidth = UIScreen.mainScreen().bounds.width
+    
+}
+
+class NSAPI {
+    
+    static func getProfileAddedSetting() -> Bool {
+        return (NSUserDefaults.standardUserDefaults().boolForKey("profileSet"))
+    }
+    
+    static func setProfileAddedSetting(setting : Bool) {
+        NSUserDefaults.standardUserDefaults().setBool(setting, forKey: "profileSet")
+    }
+    
+}
