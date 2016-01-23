@@ -11,6 +11,7 @@
 		7ADD5BC884ED6370D23A344C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FDCF531341D3EFA66FBFC8D /* Pods.framework */; };
 		E55A4F571C53483300E95058 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55A4F561C53483300E95058 /* HistoryViewController.swift */; };
 		E55A4F591C53485C00E95058 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55A4F581C53485C00E95058 /* ProfileViewController.swift */; };
+		E55A4F5B1C53FB1000E95058 /* MatchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55A4F5A1C53FB1000E95058 /* MatchDetailsViewController.swift */; };
 		E565C4771C5333CD001EC046 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E565C4761C5333CD001EC046 /* API.swift */; };
 		E58ACA381C532BEE001EF569 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ACA371C532BEE001EF569 /* AppDelegate.swift */; };
 		E58ACA3A1C532BEE001EF569 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ACA391C532BEE001EF569 /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 		D1CFB2E38AF68C2D2CFE482A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E55A4F561C53483300E95058 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		E55A4F581C53485C00E95058 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E55A4F5A1C53FB1000E95058 /* MatchDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchDetailsViewController.swift; sourceTree = "<group>"; };
 		E565C4761C5333CD001EC046 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		E58ACA341C532BEE001EF569 /* HoML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoML.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E58ACA371C532BEE001EF569 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			children = (
 				E58ACA371C532BEE001EF569 /* AppDelegate.swift */,
 				E58ACA391C532BEE001EF569 /* ViewController.swift */,
+				E55A4F5A1C53FB1000E95058 /* MatchDetailsViewController.swift */,
 				E55A4F561C53483300E95058 /* HistoryViewController.swift */,
 				70A9F6211C5365FC0027B3F7 /* DailyViewController.swift */,
 				E55A4F581C53485C00E95058 /* ProfileViewController.swift */,
@@ -228,6 +231,7 @@
 			files = (
 				70A9F6221C5365FD0027B3F7 /* DailyViewController.swift in Sources */,
 				E55A4F591C53485C00E95058 /* ProfileViewController.swift in Sources */,
+				E55A4F5B1C53FB1000E95058 /* MatchDetailsViewController.swift in Sources */,
 				E58ACA3A1C532BEE001EF569 /* ViewController.swift in Sources */,
 				E58ACA381C532BEE001EF569 /* AppDelegate.swift in Sources */,
 				E565C4771C5333CD001EC046 /* API.swift in Sources */,

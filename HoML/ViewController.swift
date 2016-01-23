@@ -51,7 +51,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         
         // If Location Services enabled, set up timer.
         if(CLLocationManager.locationServicesEnabled()) {
-            locationTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: "sendLocation", userInfo: nil, repeats: true)
+            locationTimer = NSTimer.scheduledTimerWithTimeInterval(300, target: self, selector: "sendLocation", userInfo: nil, repeats: true)
         }
         
         // UI Elements - do not add yet
@@ -133,6 +133,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.biosTableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let mdvc : MatchDetailsViewController = MatchDetailsViewController()
+        mdvc.matchData = self.userMatches["matches"][indexPath.row]
+        self.navigationController?.pushViewController(mdvc, animated: true)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
