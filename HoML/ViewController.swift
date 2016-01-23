@@ -24,6 +24,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     var goToProfileLabel : UILabel!
     
     override func viewDidLoad() {
+        
         // Basics
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
@@ -98,7 +99,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     }
     
     func pushToProfileViewController(sender : UIButton) {
-        NSAPI.setProfileAddedSetting(true)
+        // NSAPI.setProfileAddedSetting(true)
         let pvc : ProfileViewController = ProfileViewController()
         self.navigationController?.pushViewController(pvc, animated: true)
     }

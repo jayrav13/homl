@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        // NSAPI.setProfileAddedSetting(false)
+        NSAPI.setProfileAddedSetting(false)
         
         let vc : ViewController = ViewController()
         let nvc : UINavigationController = UINavigationController(rootViewController: vc)
