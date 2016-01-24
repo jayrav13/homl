@@ -37,62 +37,67 @@ class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPicker
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor(red: 59/255, green: 75/255, blue: 56/255, alpha: 1)
         self.title = "Profile"
         self.containerView = UIView(frame: self.view.frame)
         
         self.saveBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveButtonPressed:")
         self.navigationItem.rightBarButtonItem = self.saveBarButtonItem
         
-        let usernameRect : CGRect = CGRect(x: Standard.screenWidth * 0.25, y: Standard.screenHeight * 0.20, width: Standard.screenWidth * 0.50, height: Standard.screenHeight * 0.05)
+        let usernameRect : CGRect = CGRect(x: Standard.screenWidth * 0.25, y: Standard.screenHeight * 0.15, width: Standard.screenWidth * 0.50, height: Standard.screenHeight * 0.05)
         
         self.genderTextLabel = UILabel()
-        self.genderTextLabel.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.30, width: Standard.screenWidth * 0.3, height: Standard.screenHeight * 0.05)
+        self.genderTextLabel.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.2, width: Standard.screenWidth * 0.3, height: Standard.screenHeight * 0.05)
         self.genderTextLabel.text = "Gender"
         self.genderTextLabel.textAlignment = NSTextAlignment.Center
         self.containerView.addSubview(self.genderTextLabel)
         
         self.genderSegmentedControl = UISegmentedControl(items: ["M","F","O"])
-        self.genderSegmentedControl.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.40, width: Standard.screenWidth * 0.3, height: Standard.screenHeight * 0.05)
+        self.genderSegmentedControl.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.25, width: Standard.screenWidth * 0.3, height: Standard.screenHeight * 0.05)
+        self.genderSegmentedControl.tintColor = UIColor(red: 57/255, green: 181/255, blue: 74/255, alpha: 1)
+        self.genderSegmentedControl.backgroundColor = UIColor(red: 220/255, green: 240/255, blue: 220/255, alpha: 1)
+        self.genderSegmentedControl.layer.masksToBounds = true
+        self.genderSegmentedControl.layer.cornerRadius = 5
         self.containerView.addSubview(self.genderSegmentedControl)
         
         self.ageTextLabel = UILabel()
-        self.ageTextLabel.frame = CGRect(x: Standard.screenWidth * 0.6, y: Standard.screenHeight * 0.30, width: Standard.screenWidth * 0.3, height: Standard.screenHeight * 0.05)
+        self.ageTextLabel.frame = CGRect(x: Standard.screenWidth * 0.6, y: Standard.screenHeight * 0.2, width: Standard.screenWidth * 0.3, height: Standard.screenHeight * 0.05)
         self.ageTextLabel.text = "Age"
         self.ageTextLabel.textAlignment = NSTextAlignment.Center
         self.containerView.addSubview(self.ageTextLabel)
         
         self.ageSelectionButton = UIButton(type: UIButtonType.System)
-        self.ageSelectionButton.frame = CGRect(x: Standard.screenWidth * 0.6, y: Standard.screenHeight * 0.40, width: Standard.screenWidth * 0.3, height: Standard.screenHeight * 0.05)
+        self.ageSelectionButton.frame = CGRect(x: Standard.screenWidth * 0.65, y: Standard.screenHeight * 0.25, width: Standard.screenWidth * 0.2, height: Standard.screenHeight * 0.05)
         self.ageSelectionButton.setTitle("Select...", forState: UIControlState.Normal)
+        self.ageSelectionButton.backgroundColor = UIColor(red: 220/255, green: 240/255, blue: 220/255, alpha: 1)
+        self.ageSelectionButton.layer.borderWidth = 1
+        self.ageSelectionButton.layer.cornerRadius = 5
+        self.ageSelectionButton.layer.borderColor = UIColor.greenColor().CGColor
         self.ageSelectionButton.addTarget(self, action: "ageSelected:", forControlEvents: UIControlEvents.TouchUpInside)
         self.containerView.addSubview(self.ageSelectionButton)
         
 
         
         self.bioTextLabel = UILabel()
-        self.bioTextLabel.frame = CGRect(x: 0, y: Standard.screenHeight * 0.5, width: Standard.screenWidth, height: Standard.screenHeight * 0.05)
-        self.bioTextLabel.text = "tell the world about yourself."
-        self.bioTextLabel.textAlignment = NSTextAlignment.Center
+        self.bioTextLabel.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.4, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.05)
+        self.bioTextLabel.text = "Tell us about yourself"
         self.containerView.addSubview(self.bioTextLabel)
         
         self.bioTextField = UITextField()
-        self.bioTextField.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.55, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.05)
-        self.bioTextField.placeholder = "bio"
-        self.bioTextField.textAlignment = NSTextAlignment.Center
+        self.bioTextField.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.45, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.05)
+        self.bioTextField.placeholder = "40 characters max"
         self.bioTextField.delegate = self
         self.bioTextField.borderStyle = UITextBorderStyle.RoundedRect
         self.containerView.addSubview(self.bioTextField)
         
         self.storyTextLabel = UILabel()
-        self.storyTextLabel.frame = CGRect(x: 0, y: Standard.screenHeight * 0.6, width: Standard.screenWidth, height: Standard.screenHeight * 0.05)
-        self.storyTextLabel.text = "tell us your story."
-        self.storyTextLabel.textAlignment = NSTextAlignment.Center
+        self.storyTextLabel.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.55, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.05)
+        self.storyTextLabel.text = "Tell us a story"
         self.containerView.addSubview(self.storyTextLabel)
         
         self.storyTextField = UITextField()
-        self.storyTextField.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.65, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.25)
-        self.storyTextField.placeholder = "story"
+        self.storyTextField.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.6, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.3)
+        self.storyTextField.placeholder = "Hear me roar!"
         self.storyTextField.textAlignment = NSTextAlignment.Center
         self.storyTextField.delegate = self
         self.storyTextField.borderStyle = UITextBorderStyle.RoundedRect
@@ -116,7 +121,7 @@ class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPicker
         if(NSAPI.getProfileAddedSetting()) {
             self.usernameTextLabel = UILabel()
             self.usernameTextLabel.frame = usernameRect
-            self.usernameTextLabel.text = self.userData["username"].stringValue
+            self.usernameTextLabel.text = "Hello, " + self.userData["username"].stringValue
             self.usernameTextLabel.textAlignment = NSTextAlignment.Center
             self.containerView.addSubview(self.usernameTextLabel)
             

@@ -25,9 +25,8 @@ class MatchDetailsViewController : UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 59/255, green: 75/255, blue: 56/255, alpha: 1)
         self.title = self.matchData["match"]["username"].stringValue
-        
-        self.aslLabel = UILabel()
-        self.aslLabel.frame = CGRect(x: 0, y: Standard.screenHeight * 0.15, width: Standard.screenWidth, height: Standard.screenHeight * 0.05)
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 57/255, green: 181/255, blue: 74/255, alpha: 1)
+        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: 57/255, green: 181/255, blue: 74/255, alpha: 1)]
         
         let mapping = [
             "M" : "male",
@@ -35,14 +34,38 @@ class MatchDetailsViewController : UIViewController, MKMapViewDelegate {
             "O" : ""
         ]
         
+        self.aslLabel = UILabel()
+        self.aslLabel.frame = CGRect(x: 0, y: Standard.screenHeight * 0.09, width: Standard.screenWidth, height: Standard.screenHeight * 0.1)
         self.aslLabel.text = String(Int(self.matchData["match"]["age"].doubleValue)) + ", " + mapping[self.matchData["match"]["gender"].stringValue]!
         self.aslLabel.textAlignment = NSTextAlignment.Center
         self.aslLabel.textColor = UIColor(red: 151/255, green: 189/255, blue: 142/255, alpha: 1)
-        self.aslLabel.font = UIFont(name: "OpenSans-Semibold", size: 20)
+        self.aslLabel.font = UIFont(name: "OpenSans-Semibold", size: 32)
         self.view.addSubview(self.aslLabel)
         
+        self.bioLabel = UILabel()
+        self.bioLabel.frame = CGRect(x: Standard.screenWidth * 0.19, y: Standard.screenHeight * 0.18, width: Standard.screenWidth * 0.62, height: Standard.screenHeight * 0.04)
+        self.bioLabel.layer.cornerRadius = 5
+        self.bioLabel.layer.masksToBounds = true
+        self.bioLabel.text = self.matchData["match"]["bio"].stringValue
+        self.bioLabel.font = UIFont(name: "OpenSans-Semibold", size: 12)
+        self.bioLabel.textColor = UIColor(red: 151/255, green: 189/255, blue: 142/255, alpha: 1)
+        self.bioLabel.textAlignment = NSTextAlignment.Center
+        self.bioLabel.layer.borderColor = UIColor(red: 151/255, green: 189/255, blue: 142/255, alpha: 1).CGColor
+        self.bioLabel.layer.borderWidth = 1
+        self.view.addSubview(self.bioLabel)
+        
+        self.storyLabel = UILabel()
+        self.storyLabel.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.25, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.4)
+        self.storyLabel.text = self.matchData["match"]["story"].stringValue
+        self.storyLabel.textAlignment = NSTextAlignment.Justified
+        self.storyLabel.numberOfLines = 30
+        self.storyLabel.font = UIFont(name: "OpenSans-Semibold", size: 20)
+        self.storyLabel.adjustsFontSizeToFitWidth = true
+        self.storyLabel.textColor = UIColor(red: 151/255, green: 189/255, blue: 142/255, alpha: 1)
+        self.view.addSubview(self.storyLabel)
+        
         self.mapView = MKMapView()
-        self.mapView.frame = CGRect(x: 0, y: Standard.screenHeight * 0.25, width: Standard.screenWidth, height: Standard.screenHeight * 0.3)
+        self.mapView.frame = CGRect(x: 0, y: Standard.screenHeight * 0.7, width: Standard.screenWidth, height: Standard.screenHeight * 0.3)
         self.mapView.mapType = MKMapType.Standard
         self.mapView.zoomEnabled = true
         self.mapView.scrollEnabled = true
@@ -57,24 +80,6 @@ class MatchDetailsViewController : UIViewController, MKMapViewDelegate {
         pin.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
         pin.title = self.matchData["match"]["username"].stringValue
         self.mapView.addAnnotation(pin)
-        
-        self.bioLabel = UILabel()
-        self.bioLabel.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.55, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.1)
-        self.bioLabel.text = self.matchData["match"]["bio"].stringValue
-        self.bioLabel.textAlignment = NSTextAlignment.Center
-        self.view.addSubview(self.bioLabel)
-        
-        
-        
-        self.storyLabel = UILabel()
-        self.storyLabel.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.7, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.2)
-        self.storyLabel.text = self.matchData["match"]["story"].stringValue
-        self.storyLabel.textAlignment = NSTextAlignment.Justified
-        self.storyLabel.numberOfLines = 10
-        self.storyLabel.font = UIFont(name: "OpenSans-Semibold", size: 20)
-        self.storyLabel.adjustsFontSizeToFitWidth = true
-        self.storyLabel.textColor = UIColor(red: 151/255, green: 189/255, blue: 142/255, alpha: 1)
-        self.view.addSubview(self.storyLabel)
     }
     
     override func didReceiveMemoryWarning() {
