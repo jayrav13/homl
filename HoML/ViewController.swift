@@ -60,7 +60,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         
         // If Location Services enabled, set up timer.
         if(CLLocationManager.locationServicesEnabled()) {
-            locationTimer = NSTimer.scheduledTimerWithTimeInterval(300, target: self, selector: "sendLocation", userInfo: nil, repeats: true)
+            locationTimer = NSTimer.scheduledTimerWithTimeInterval(30 , target: self, selector: "sendLocation", userInfo: nil, repeats: true)
         }
         
         // UI Elements - do not add yet
@@ -114,7 +114,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     
     func pushToHistoryViewController(sender : UIButton) {
         let hvc : HistoryViewController = HistoryViewController()
-        self.navigationController?.pushViewController(hvc, animated: true)
+        API.getDates { (success, data) -> Void in
+            hvc.matchDates = data
+            self.navigationController?.pushViewController(hvc, animated: true)
+        }
     }
     
     func pushToProfileViewController(sender : UIButton) {

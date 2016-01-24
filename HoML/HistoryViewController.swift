@@ -28,24 +28,10 @@ class HistoryViewController : UIViewController, UITableViewDelegate, UITableView
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         self.view.addSubview(tableView)
-        
-        matchDates = []
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        API.getDates { (success, data) -> Void in
-            self.matchDates = data
-            print (self.matchDates)
-            self.tableView.reloadData()
-        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(matchDates.count != 0) {
-            return matchDates.count
-        } else {
-            return 1
-        }
+        return matchDates["dates"].count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -61,10 +47,10 @@ class HistoryViewController : UIViewController, UITableViewDelegate, UITableView
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let dvc : DailyViewController = DailyViewController()
         dvc.date = self.tableView.cellForRowAtIndexPath(indexPath)?.textLabel!.text
-        API.getDateMatches((self.tableView.cellForRowAtIndexPath(indexPath)?.textLabel!.text)!) { (success, data) -> Void in
+        API.getDateMatches(dvc.date) { (success, data) -> Void in
             dvc.dailyMatches = data
+            self.navigationController?.pushViewController(dvc, animated: true)
         }
-        self.navigationController?.pushViewController(dvc, animated: true)
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

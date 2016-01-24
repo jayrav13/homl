@@ -29,16 +29,10 @@ class DailyViewController : UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dataSource = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.view.addSubview(tableView)
-        
-        dailyMatches = []
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(dailyMatches.count != 0) {
-            return dailyMatches.count
-        } else {
-            return 1
-        }
+        return dailyMatches["matches"].count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -47,9 +41,6 @@ class DailyViewController : UIViewController, UITableViewDelegate, UITableViewDa
         if(dailyMatches.count != 0) {
             cell.textLabel?.text = self.dailyMatches["matches"][indexPath.row]["match"]["number"].stringValue
             cell.detailTextLabel?.text = self.dailyMatches["matches"][indexPath.row]["match"]["bio"].stringValue
-        }
-        else {
-            cell.textLabel?.text = "Test"
         }
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
