@@ -25,8 +25,6 @@ class MatchDetailsViewController : UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 59/255, green: 75/255, blue: 56/255, alpha: 1)
         self.title = self.matchData["match"]["username"].stringValue
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 57/255, green: 181/255, blue: 74/255, alpha: 1)
-        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: 57/255, green: 181/255, blue: 74/255, alpha: 1)]
         
         let mapping = [
             "M" : "male",

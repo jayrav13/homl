@@ -30,15 +30,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     var dangerButton : UIButton!
     
     override func viewDidLoad() {
-
-        for family: String in UIFont.familyNames()
-        {
-            print("\(family)")
-            for names: String in UIFont.fontNamesForFamilyName(family)
-            {
-                print("== \(names)")
-            }
-        }
+        
+        // Nav bar title
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 57/255, green: 181/255, blue: 74/255, alpha: 1)
+        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: 57/255, green: 181/255, blue: 74/255, alpha: 1)]
         
         // Basics
         super.viewDidLoad()
