@@ -48,6 +48,7 @@ class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPicker
         
         self.genderTextLabel = UILabel()
         self.genderTextLabel.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.2, width: Standard.screenWidth * 0.3, height: Standard.screenHeight * 0.05)
+        self.genderTextLabel.textColor = UIColor(red: 151/255, green: 189/255, blue: 142/255, alpha: 1)
         self.genderTextLabel.text = "Gender"
         self.genderTextLabel.textAlignment = NSTextAlignment.Center
         self.containerView.addSubview(self.genderTextLabel)
@@ -62,6 +63,7 @@ class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPicker
         
         self.ageTextLabel = UILabel()
         self.ageTextLabel.frame = CGRect(x: Standard.screenWidth * 0.6, y: Standard.screenHeight * 0.2, width: Standard.screenWidth * 0.3, height: Standard.screenHeight * 0.05)
+        self.ageTextLabel.textColor = UIColor(red: 151/255, green: 189/255, blue: 142/255, alpha: 1)
         self.ageTextLabel.text = "Age"
         self.ageTextLabel.textAlignment = NSTextAlignment.Center
         self.containerView.addSubview(self.ageTextLabel)
@@ -72,7 +74,8 @@ class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPicker
         self.ageSelectionButton.backgroundColor = UIColor(red: 220/255, green: 240/255, blue: 220/255, alpha: 1)
         self.ageSelectionButton.layer.borderWidth = 1
         self.ageSelectionButton.layer.cornerRadius = 5
-        self.ageSelectionButton.layer.borderColor = UIColor.greenColor().CGColor
+        self.ageSelectionButton.layer.borderColor = UIColor(red: 57/255, green: 181/255, blue: 74/255, alpha: 1).CGColor
+        self.ageSelectionButton.tintColor = UIColor(red: 57/255, green: 181/255, blue: 74/255, alpha: 1)
         self.ageSelectionButton.addTarget(self, action: "ageSelected:", forControlEvents: UIControlEvents.TouchUpInside)
         self.containerView.addSubview(self.ageSelectionButton)
         
@@ -80,11 +83,13 @@ class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPicker
         
         self.bioTextLabel = UILabel()
         self.bioTextLabel.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.4, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.05)
+        self.bioTextLabel.textColor = UIColor(red: 151/255, green: 189/255, blue: 142/255, alpha: 1)
         self.bioTextLabel.text = "Tell us about yourself"
         self.containerView.addSubview(self.bioTextLabel)
         
         self.bioTextField = UITextField()
         self.bioTextField.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.45, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.05)
+        self.bioTextField.backgroundColor = UIColor(red: 220/255, green: 240/255, blue: 220/255, alpha: 1)
         self.bioTextField.placeholder = "40 characters max"
         self.bioTextField.delegate = self
         self.bioTextField.borderStyle = UITextBorderStyle.RoundedRect
@@ -92,11 +97,13 @@ class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPicker
         
         self.storyTextLabel = UILabel()
         self.storyTextLabel.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.55, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.05)
+        self.storyTextLabel.textColor = UIColor(red: 151/255, green: 189/255, blue: 142/255, alpha: 1)
         self.storyTextLabel.text = "Tell us a story"
         self.containerView.addSubview(self.storyTextLabel)
         
         self.storyTextField = UITextField()
         self.storyTextField.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.6, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.3)
+        self.storyTextField.backgroundColor = UIColor(red: 220/255, green: 240/255, blue: 220/255, alpha: 1)
         self.storyTextField.placeholder = "Hear me roar!"
         self.storyTextField.textAlignment = NSTextAlignment.Center
         self.storyTextField.delegate = self
@@ -123,6 +130,7 @@ class ProfileViewController : UIViewController, UIPickerViewDataSource, UIPicker
             self.usernameTextLabel.frame = usernameRect
             self.usernameTextLabel.text = "Hello, " + self.userData["username"].stringValue
             self.usernameTextLabel.textAlignment = NSTextAlignment.Center
+            self.usernameTextLabel.textColor = UIColor(red: 151/255, green: 189/255, blue: 142/255, alpha: 1)
             self.containerView.addSubview(self.usernameTextLabel)
             
             let pickerValues = ["M","F","O"]

@@ -28,6 +28,8 @@ class DailyViewController : UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.backgroundColor = UIColor(red: 59/255, green: 75/255, blue: 56/255, alpha: 1)
         self.view.addSubview(tableView)
     }
     
@@ -38,9 +40,10 @@ class DailyViewController : UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell : UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell")!
         cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell")
+        cell.backgroundColor = UIColor(red: 59/255, green: 75/255, blue: 56/255, alpha: 1)
+        cell.textLabel?.textColor = UIColor(red: 151/255, green: 189/255, blue: 142/255, alpha: 1)
         if(dailyMatches.count != 0) {
-            cell.textLabel?.text = self.dailyMatches["matches"][indexPath.row]["match"]["number"].stringValue
-            cell.detailTextLabel?.text = self.dailyMatches["matches"][indexPath.row]["match"]["bio"].stringValue
+            cell.textLabel?.text = self.dailyMatches["matches"][indexPath.row]["match"]["bio"].stringValue
         }
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
@@ -54,7 +57,7 @@ class DailyViewController : UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return (Standard.screenHeight - 44)/5
+        return (Standard.screenHeight - 44)/10
     }
     
     override func didReceiveMemoryWarning() {
