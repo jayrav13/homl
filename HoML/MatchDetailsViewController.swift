@@ -19,17 +19,17 @@ class MatchDetailsViewController : UIViewController, MKMapViewDelegate {
     var storyLabel : UILabel!
     
     var aslLabel : UILabel!
-    var crossImageView : UIImageView!
+    
+    var storyScrollView : UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 59/255, green: 75/255, blue: 56/255, alpha: 1)
-        self.title = self.matchData["match"]["username"].stringValue
         
         let mapping = [
             "M" : "male",
             "F" : "female",
-            "O" : ""
+            "O" : "other"
         ]
         
         self.aslLabel = UILabel()
@@ -52,15 +52,23 @@ class MatchDetailsViewController : UIViewController, MKMapViewDelegate {
         self.bioLabel.layer.borderWidth = 1
         self.view.addSubview(self.bioLabel)
         
+        self.storyScrollView = UIScrollView()
+        self.storyScrollView.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.25, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.4)
+        self.view.addSubview(self.storyScrollView)
+        
         self.storyLabel = UILabel()
-        self.storyLabel.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.25, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.4)
+        self.storyLabel.frame = CGRect(x: 0, y: 0, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.4)
+        // self.storyLabel.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.25, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.4)
         self.storyLabel.text = self.matchData["match"]["story"].stringValue
         self.storyLabel.textAlignment = NSTextAlignment.Justified
         self.storyLabel.numberOfLines = 30
         self.storyLabel.font = UIFont(name: "OpenSans-Semibold", size: 20)
-        self.storyLabel.adjustsFontSizeToFitWidth = true
         self.storyLabel.textColor = UIColor(red: 151/255, green: 189/255, blue: 142/255, alpha: 1)
-        self.view.addSubview(self.storyLabel)
+        
+        self.storyScrollView.contentSize = CGSize(width: self.storyLabel.frame.width, height: self.storyLabel.intrinsicContentSize().height)
+        self.storyScrollView.addSubview(self.storyLabel)
+        
+        // self.view.addSubview(self.storyLabel)
         
         self.mapView = MKMapView()
         self.mapView.frame = CGRect(x: 0, y: Standard.screenHeight * 0.7, width: Standard.screenWidth, height: Standard.screenHeight * 0.3)

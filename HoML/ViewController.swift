@@ -78,7 +78,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         self.saidHelloToLabel.frame = CGRect(x: 0, y: Standard.screenHeight * 0.25, width: Standard.screenWidth, height: Standard.screenHeight * 0.05)
         self.saidHelloToLabel.textColor = UIColor(red: 151/255, green: 189/255, blue: 142/255, alpha: 1)
         self.saidHelloToLabel.font = UIFont(name: "OpenSans-Semibold", size: 18)
-        self.saidHelloToLabel.text = "today, you could have said hello to..."
+        self.saidHelloToLabel.text = "Today, you could have said \"hello\" to..."
         self.saidHelloToLabel.adjustsFontSizeToFitWidth = true
         self.saidHelloToLabel.textAlignment = NSTextAlignment.Center
         
@@ -89,10 +89,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         self.biosTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.biosTableView.scrollEnabled = false
         self.biosTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.biosTableView.backgroundColor = UIColor(red: 59/255, green: 75/255, blue: 56/255, alpha: 1)
         
         self.goToProfileLabel = UILabel()
         self.goToProfileLabel.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.40, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.20)
         self.goToProfileLabel.text = "Go to your Profile page to get started!"
+        self.goToProfileLabel.font = UIFont(name: "OpenSans-Semibold", size: 18)
+        self.goToProfileLabel.textColor = UIColor(red: 151/255, green: 189/255, blue: 142/255, alpha: 1)
         self.goToProfileLabel.adjustsFontSizeToFitWidth = true
         self.goToProfileLabel.textAlignment = NSTextAlignment.Center
         
@@ -113,7 +116,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
         self.activityIndicator.frame = CGRect(x: Standard.screenWidth / 2 - Standard.screenWidth * 0.05, y: Standard.screenHeight / 2 - Standard.screenWidth * 0.05, width: Standard.screenWidth * 0.1, height: Standard.screenHeight * 0.1)
         self.activityIndicator.alpha = 0
-        self.view.addSubview(self.activityIndicator)
+        if(NSAPI.getProfileAddedSetting()) {
+            self.view.addSubview(self.activityIndicator)
+        }
         
         self.loadUIElements()
     }
