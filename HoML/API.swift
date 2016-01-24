@@ -14,7 +14,7 @@ import UIKit
 
 class API {
     
-    static let baseURL = "http://koolaid.ngrok.io/"
+    static let baseURL = "http://45.79.141.223/"
     static let number = (UIDevice.currentDevice().identifierForVendor?.UUIDString)!
     
     static func getHeartbeat(completion : (success : Bool, data : JSON) -> Void) -> Void {
