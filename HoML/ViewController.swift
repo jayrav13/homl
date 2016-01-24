@@ -27,6 +27,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     var currentUser : JSON!
     var userMatches : JSON!
     
+    var dangerButton : UIButton!
+    
     override func viewDidLoad() {
 
         for family: String in UIFont.familyNames()
@@ -83,8 +85,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         self.goToProfileLabel.adjustsFontSizeToFitWidth = true
         self.goToProfileLabel.textAlignment = NSTextAlignment.Center
         
+        self.dangerButton = UIButton(type: UIButtonType.System)
+        self.dangerButton.frame = CGRect(x: Standard.screenWidth * 0.30, y: Standard.screenHeight * 0.9, width: Standard.screenWidth * 0.4, height: Standard.screenHeight * 0.05)
+        self.dangerButton.setTitle("DangerView", forState: UIControlState.Normal)
+        self.dangerButton.addTarget(self, action: "pushToDangerViewController:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(self.dangerButton)
+        
         self.loadUIElements()
-
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -136,8 +143,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         var cell : UITableViewCell = self.biosTableView.dequeueReusableCellWithIdentifier("cell")!
         cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell")
         if(userMatches.count != 0) {
-            cell.textLabel?.text = self.userMatches["matches"][indexPath.row]["match"]["number"].stringValue
-            cell.detailTextLabel?.text = self.userMatches["matches"][indexPath.row]["match"]["bio"].stringValue
+            cell.textLabel?.text = self.userMatches["matches"][indexPath.row]["match"]["bio"].stringValue
+            cell.detailTextLabel?.text = self.userMatches["matches"][indexPath.row]["match"]["story"].stringValue
         }
         else {
             cell.textLabel?.text = "Test"
@@ -200,6 +207,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
             self.view.addSubview(self.goToProfileLabel)
             // Do nothing
         }
+    }
+    
+    func pushToDangerViewController(sender : UIButton) {
+        let dvc : DangerViewController = DangerViewController()
+        self.navigationController?.pushViewController(dvc, animated: true)
     }
     
 }

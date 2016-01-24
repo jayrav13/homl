@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // NSAPI.setProfileAddedSetting(true)
         
+        /*let dvc : DangerViewController = DangerViewController()
+        self.window?.rootViewController = dvc
+        self.window?.makeKeyAndVisible()*/
+        
         let vc : ViewController = ViewController()
         let nvc : UINavigationController = UINavigationController(rootViewController: vc)
         self.window?.rootViewController = nvc

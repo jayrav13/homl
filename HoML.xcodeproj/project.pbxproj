@@ -23,6 +23,7 @@
 		E55A4F891C542F7700E95058 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E55A4F7F1C542F6D00E95058 /* OpenSans-Semibold.ttf */; };
 		E55A4F8A1C542F7700E95058 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E55A4F801C542F6D00E95058 /* OpenSans-SemiboldItalic.ttf */; };
 		E55A4F8B1C542F7F00E95058 /* mentone-semibol.otf in Resources */ = {isa = PBXBuildFile; fileRef = E55A4F5F1C542C0700E95058 /* mentone-semibol.otf */; };
+		E55A4F8D1C54584E00E95058 /* DangerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55A4F8C1C54584E00E95058 /* DangerViewController.swift */; };
 		E565C4771C5333CD001EC046 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E565C4761C5333CD001EC046 /* API.swift */; };
 		E58ACA381C532BEE001EF569 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ACA371C532BEE001EF569 /* AppDelegate.swift */; };
 		E58ACA3A1C532BEE001EF569 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ACA391C532BEE001EF569 /* ViewController.swift */; };
@@ -51,6 +52,7 @@
 		E55A4F7E1C542F6D00E95058 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		E55A4F7F1C542F6D00E95058 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		E55A4F801C542F6D00E95058 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		E55A4F8C1C54584E00E95058 /* DangerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DangerViewController.swift; sourceTree = "<group>"; };
 		E565C4761C5333CD001EC046 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		E58ACA341C532BEE001EF569 /* HoML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoML.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E58ACA371C532BEE001EF569 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				E58ACA391C532BEE001EF569 /* ViewController.swift */,
 				E55A4F5A1C53FB1000E95058 /* MatchDetailsViewController.swift */,
 				E55A4F561C53483300E95058 /* HistoryViewController.swift */,
+				E55A4F8C1C54584E00E95058 /* DangerViewController.swift */,
 				70A9F6211C5365FC0027B3F7 /* DailyViewController.swift */,
 				E55A4F581C53485C00E95058 /* ProfileViewController.swift */,
 				E565C4761C5333CD001EC046 /* API.swift */,
@@ -288,6 +291,7 @@
 				E58ACA381C532BEE001EF569 /* AppDelegate.swift in Sources */,
 				E565C4771C5333CD001EC046 /* API.swift in Sources */,
 				E55A4F571C53483300E95058 /* HistoryViewController.swift in Sources */,
+				E55A4F8D1C54584E00E95058 /* DangerViewController.swift in Sources */,
 				E58ACA401C532BEE001EF569 /* HoML.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
