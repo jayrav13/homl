@@ -84,7 +84,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         self.goToProfileLabel.textAlignment = NSTextAlignment.Center
         
         self.loadUIElements()
-                
+
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -98,9 +98,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
     }
-
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        self.locationManager.startUpdatingLocation()
+    }
+    
     func sendLocation() {
         API.sendLocation((self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!) { (success, data) -> Void in
             if(success) {
