@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class HistoryViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var meetLabel : UILabel!
     var tableView : UITableView!
     
     var matchDates: JSON!
@@ -20,15 +21,29 @@ class HistoryViewController : UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         
         self.title = "History"
+        self.view.backgroundColor = UIColor(red: 59/255, green: 75/255, blue: 56/255, alpha: 1)
+        
+        // set up meet people label
+        self.meetLabel = UILabel()
+        self.meetLabel.frame = CGRect(x: Standard.screenWidth * 0.1, y: Standard.screenHeight * 0.5, width: Standard.screenWidth * 0.8, height: Standard.screenHeight * 0.05)
+        self.meetLabel.text = "Pass by some people to see their stories!"
+        self.meetLabel.textColor = UIColor(red: 151/255, green: 189/255, blue: 142/255, alpha: 1)
+        self.meetLabel.adjustsFontSizeToFitWidth = true
+        self.meetLabel.textAlignment = NSTextAlignment.Center
         
         // set up TableView
-        tableView = UITableView(frame: self.view.frame)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        tableView.backgroundColor = UIColor(red: 59/255, green: 75/255, blue: 56/255, alpha: 1)
-        self.view.addSubview(tableView)
+        self.tableView = UITableView(frame: self.view.frame)
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.tableView.backgroundColor = UIColor(red: 59/255, green: 75/255, blue: 56/255, alpha: 1)
+        
+        if(matchDates["dates"].count != 0) {
+            self.view.addSubview(tableView)
+        } else {
+            self.view.addSubview(meetLabel)
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
