@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>FooterText</key>
+			<string>This application makes use of the following third party libraries:</string>
+			<key>Title</key>
+			<string>Acknowledgements</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Copyright (c) 2014&#8211;2016 Alamofire Software Foundation (http://alamofire.org/)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</string>
+			<key>Title</key>
+			<string>Alamofire</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>The MIT License (MIT)
+
+Copyright (c) 2014 Ruoyu Fu
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</string>
+			<key>Title</key>
+			<string>SwiftyJSON</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>[![](https://travis-ci.org/sakrist/VBPieChart.svg?branch=master)](https://travis-ci.org/sakrist/VBPieChart)
+[![](https://img.shields.io/cocoapods/v/VBPieChart.svg?style=flat)](https://cocoapods.org/pods/VBPieChart)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)&lt;br \&gt;
+#VBPieChart
+
+Animated Pie Chart control for iOS apps, based on CALayer. Very easy in use and have custom labeling.
+
+&lt;img src="https://raw.githubusercontent.com/sakrist/VBPieChart/master/Screenshot.png" width="50%"&gt;
+
+##Usage
+
+
+#### Create simple pi chart with VBPieChart:
+
+```objc
+VBPieChart *chart = [[VBPieChart alloc] initWithFrame:CGRectMake(10, 50, 300, 300)];
+[self.view addSubview:chart];
+
+// Setup some options:
+[chart setEnableStrokeColor:YES]; 
+[chart setHoleRadiusPrecent:0.3]; /* hole inside of chart */
+
+// Prepare your data
+NSArray *chartValues = @[
+ @{@"name":@"Apples", @"value":@50, @"color":[UIColor redColor]},
+ @{@"name":@"Pears", @"value":@20, @"color":[UIColor blueColor]},
+ @{@"name":@"Oranges", @"value":@40, @"color":[UIColor orangeColor]},
+ @{@"name":@"Bananas", @"value":@70, @"color":[UIColor purpleColor]}
+];
+
+// Present pie chart with animation
+[chart setChartValues:chartValues animation:YES duration:0.4 options:VBPieChartAnimationFan];
+```
+
+`chartValues` needs to be defined as an array of dictionaries.&lt;br&gt;
+Dictionary **required** to contain value for piece with key `value`.&lt;br&gt;
+Optional:
+
+- `name`
+- `color`
+- `labelColor`
+- `accent`
+- `strokeColor`
+
+
+
+#### Chart from JSON
+
+```objc
+VBPieChart *chart = [[VBPieChart alloc] initWithFrame:CGRectMake(10, 50, 300, 300)];
+chart.startAngle = M_PI+M_PI_2;
+chart.holeRadiusPrecent = 0.5;
+[self.view addSubview:chart];
+NSString *json_example = @"[ {\"name\":\"first\", \"value\":\"50\", \"color\":\"#84C69B\", \"strokeColor\":\"#fff\"}, \
+{\"name\":\"second\", \"value\":\"60\", \"color\":\"#FECEA8\", \"strokeColor\":\"#fff\"}, \
+{\"name\":\"second\", \"value\":\"75\", \"color\":\"#F7EEBB\", \"strokeColor\":\"#fff\"}, \
+{\"name\":\"second\", \"value\":\"90\", \"color\":\"#D7C1E0\", \"strokeColor\":\"#fff\"} ]";
+
+NSData *data = [json_example dataUsingEncoding:NSUTF8StringEncoding];
+NSArray *chartValues = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+
+[chart setChartValues:chartValues animation:YES duration:0.5 options:VBPieChartAnimationFan];
+```
+
+#### Chart with custom label position
+```objc
+VBPieChart *chart = [[VBPieChart alloc] initWithFrame:CGRectMake(10, 50, 300, 300)];
+chart.startAngle = M_PI+M_PI_2;
+chart.holeRadiusPrecent = 0.5;
+[self.view addSubview:chart];
+[chart setLabelsPosition:VBLabelsPositionCustom];
+[chart setLabelBlock:^CGPoint( CALayer *layer, NSInteger index) {
+    CGPoint p = CGPointMake(sin(-index/10.0*M_PI)*50+50, index*30);
+    return p;
+}];
+
+[chart setChartValues:@[
+                         @{@"name":@"37%", @"value":@65, @"color":@"#5677fcaa", @"labelColor":@"#000"},
+                         @{@"name":@"13%", @"value":@23, @"color":@"#2baf2baa", @"labelColor":@"#000"},
+                         @{@"name":@"19.3%", @"value":@34, @"color":@"#b0bec5aa", @"labelColor":@"#000"},
+                         @{@"name":@"30.7%", @"value":@54, @"color":@"#f57c00aa", @"labelColor":@"#000"}
+                         ]
+             animation:YES];
+```
+
+## Basic Documentation
+
+`VBPieChart` is subclass of `UIView`.
+
+####Properties
+
+`length`&lt;br /&gt;
+Length of circle pie. Min values is 0 and max value 2*M_PI.
+
+`startAngle`&lt;br /&gt;
+Start angle of pie. (M_PI will make start at left side)
+
+`holeRadiusPrecent`&lt;br /&gt;
+hole radius in % of whole radius. Values 0..1. (acual hole radius will be calculated **radius***`holeRadiusPrecent`)
+
+`radiusPrecent` &lt;br /&gt;
+Defines the **radius**,  **full radius** = frame.size.width/2, actual **radius** = **full radius***`radiusPrecent`. Value 0..1.
+
+`labelBlock`&lt;br /&gt;
+Block will help to redefine positions for labels.
+
+####Methods
+
+Get all changed chart values back.&lt;br /&gt;
+`- (NSArray *) chartValues;`&lt;br /&gt;
+
+Simple setup data.&lt;br /&gt;
+`- (void) setChartValues:(NSArray *)chartValues;`&lt;br /&gt;
+
+Setup data to pie chart with animation or not, animation options and duration.&lt;br /&gt;
+`- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;`
+
+Animation options:
+
+* `VBPieChartAnimationFanAll`
+* `VBPieChartAnimationGrowth`
+* `VBPieChartAnimationGrowthAll`
+* `VBPieChartAnimationGrowthBack`
+* `VBPieChartAnimationGrowthBackAll`
+* `VBPieChartAnimationFan`
+* `VBPieChartAnimationTimingEaseInOut`
+* `VBPieChartAnimationTimingEaseIn`
+* `VBPieChartAnimationTimingEaseOut`
+* `VBPieChartAnimationTimingLinear`
+
+Change value for elemet at index. Value will be changed with animation. &lt;br /&gt;
+`- (void) setValue:(NSNumber*)value pieceAtIndex:(NSInteger)index;` &lt;br /&gt;
+
+Insert new piece at index. Animated.
+`- (void) insertChartValue:(NSDictionary*)chartValue atIndex:(NSInteger)index;`
+
+Remove piece at index.&lt;br /&gt;
+`- (void) removePieceAtIndex:(NSInteger)index;`&lt;br /&gt;
+
+
+</string>
+			<key>Title</key>
+			<string>VBPieChart</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Generated by CocoaPods - http://cocoapods.org</string>
+			<key>Title</key>
+			<string></string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+	</array>
+	<key>StringsTable</key>
+	<string>Acknowledgements</string>
+	<key>Title</key>
+	<string>Acknowledgements</string>
+</dict>
+</plist>
